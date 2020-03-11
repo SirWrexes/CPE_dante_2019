@@ -7,6 +7,7 @@
 
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include <time.h>
 
@@ -48,6 +49,8 @@ int main(int ac, char **av)
     x = atoi(av[1]);
     y = atoi(av[2]);
     if (x < 1 || y < 1)
+        return (84);
+    if (ac == 4 && strcmp("[perfect]", av[3]))
         return (84);
     if (print_maze(x, y))
         return (84);
