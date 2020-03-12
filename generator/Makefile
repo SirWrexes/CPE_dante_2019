@@ -63,14 +63,14 @@ RM			=	rm -f
 .PHONY:		all
 all:		$(NAME)
 $(NAME):	$(OBJ)
-			$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LFLAGS)
+			$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
 			@ echo $(CLIGHTGREEN) $(CBOLD) "# COMPILE SUCCESSFULL #"$(CRESET)
 
 #------------------------------------------------------------#
 .PHONY:		debug
 debug:		$(DEBUG_NAME)
-$(NAME):	$(OBJ)
-			$(CC) -g3 $(CFLAGS) -o $(NAME) $(OBJ)
+$(DEBUG_NAME):	$(OBJ)
+			$(CC) -g3 $(CFLAGS) -o $(DEBUG_NAME) $(OBJ)
 			@ echo $(CLIGHTGREEN) $(CBOLD) "# COMPILE SUCCESSFULL #"$(CRESET)
 
 #------------------------------------------------------------#
@@ -83,6 +83,7 @@ clean:
 .PHONY:		fclean
 fclean:		clean
 			$(RM) $(NAME)
+			$(RM) $(DEBUG_NAME)
 			$(RM) $(UT_NAME)
 
 #------------------------------------------------------------#
