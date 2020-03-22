@@ -11,19 +11,19 @@
 
 #include "solver.h"
 
-void astack_pop_into(astack_t *stack, anode_t *container)
+void astack_pop_into(anode_t *container)
 {
-    anode_t *top = stack->top;
+    anode_t *top = ADATA->olist.top;
 
     if (top != NULL)  {
-        memcpy(container, stack->top, sizeof(*container));
+        memcpy(container, ADATA->olist.top, sizeof(*container));
         container->next = NULL;
-        stack->top = top->next;
+        ADATA->olist.top = top->next;
         free(top);
     }
 }
 
-bool astack_push(astack_t *stack, cost_t c, int row, int col)
+bool astack_push(cost_t c, int row, int col)
 {
     anode_t *node = malloc(sizeof(*node));
 
@@ -31,8 +31,8 @@ bool astack_push(astack_t *stack, cost_t c, int row, int col)
         node->c = c;
         node->y = row;
         node->x = col;
-        node->next = stack->top;
-        stack->top = node;
+        node->next = ADATA->olist.top;
+        ADATA->olist.top = node;
     }
     return !(node != NULL);
 }

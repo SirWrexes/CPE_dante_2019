@@ -25,6 +25,9 @@ int main(int ac, char **av)
         return 84;
     if (!is_path(0, 0) || !is_path(cmtx.y - 1, cmtx.x - 1))
         return 84 | !dprintf(2, "Invalid entry or exit point.\n");
+    printf("Maze matrix (unaltered):\n");
+    print_matrix_withidx();
+    printf("\n\n");
     if (astar_search()) {
         print_matrix();
         return EXIT_SUCCESS;

@@ -32,25 +32,41 @@ static int get_x(direction_t dir, anode_t *parent)
     }
 }
 
+static const char *DIRECTION[4] = {"UP", "DOWN", "LEFT", "RIGHT"};
+
 void astar_search_neighbour(
     direction_t dir, bool clist[YMAX][XMAX], cell_t cell[YMAX][XMAX])
 {
-    unsigned long cnew = ADATA->parent.c + 1;
+    cost_t cnew = ADATA->parent.c + 1;
     int y = get_y(dir, &ADATA->parent);
     int x = get_x(dir, &ADATA->parent);
-    cell_t *neighbour = NULL;
+    cell_t *nghbr = NULL;
 
-    if (!is_valid(y, x))
+    printf("   Going %-5s : [x %4i][y %4i] ─  ", DIRECTION[dir], x, y);
+
+    if (!is_valid(y, x)) {
+
+        printf("Ivalid position\n");
+
         return;
-    neighbour = &cell[y][x];
+    }
+    nghbr = &cell[y][x];
     if (is_dest(y, x)) {
-        neighbour->parent.y = ADATA->parent.y;
-        neighbour->parent.x = ADATA->parent.x;
+
+        printf("Exit found !\n");
+
+        nghbr->parent.y = ADATA->parent.y;
+        nghbr->parent.x = ADATA->parent.x;
         ADATA->done = true;
-    } else if (clist[y][x] && is_path(y, x) && neighbour->c > cnew) {
-        astack_push(&ADATA->olist, cnew, y, x);
-        neighbour->c = cnew;
-        neighbour->parent.y = ADATA->parent.y;
-        neighbour->parent.x = ADATA->parent.x;
+    } else if (!clist[y][x] && is_path(y, x)
+        && (nghbr->c == -1 || nghbr->c > cnew)) {
+        astack_push(cnew, y, x);
+        nghbr->c = cnew;
+        nghbr->parent.y = ADATA->parent.y;
+        nghbr->parent.x = ADATA->parent.x;
+
+        printf("Cost = %li | Cell pushed to the opent list", cnew);
+    } else {
+        printf("Cost = %li | Cell skipped\n", cnew);
     }
 }

@@ -8,12 +8,14 @@
 #ifndef SOLVER_H
 #define SOLVER_H
 
+#include <limits.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <sys/cdefs.h>
 #include <sys/types.h>
 
-typedef unsigned long cost_t;
+typedef long cost_t;
+#define COST_MAX (LONG_MAX)
 
 typedef enum { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 } direction_t;
 
@@ -62,8 +64,8 @@ extern const cmtx_t *MTX;
 #define XMAX (MTX->x)
 #define YMAX (MTX->y)
 
-bool astack_push(astack_t *stack, cost_t c, int row, int col);
-void astack_pop_into(astack_t *stack, anode_t *container);
+bool astack_push(cost_t c, int row, int col);
+void astack_pop_into(anode_t *container);
 
 bool maze_make_charmtx(const char *const path, cmtx_t *cmtx);
 
@@ -85,8 +87,13 @@ static inline bool is_dest(int row, int col)
 static inline void print_matrix()
 {
     for (int y = 0; y < YMAX; y += 1)
-        for (int x = 0; x < XMAX; x += 1)
-            printf("%s\n", MTX->c[y]);
+        printf("%s\n", MTX->c[y]);
+}
+
+static inline void print_matrix_withidx()
+{
+    for (int y = 0; y < YMAX; y += 1)
+        printf("y: %-2i | %s\n", y, MTX->c[y]);
 }
 
 bool astar_search(void);

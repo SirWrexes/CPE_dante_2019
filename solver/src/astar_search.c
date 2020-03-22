@@ -32,7 +32,7 @@ static void astar_init(cell_t cell[YMAX][XMAX], bool clist[YMAX][XMAX])
         for (int x = 0; x < XMAX; x += 1) {
             cell[y][x].parent.x = -1;
             cell[y][x].parent.y = -1;
-            cell[y][x].c = ULONG_MAX;
+            cell[y][x].c = COST_MAX;
         }
 }
 
@@ -44,12 +44,17 @@ bool astar_search(void)
 
     astar_init(cell, clist);
     ADATA_CONTAINER = &data;
-    astack_push(&data.olist, 0, 0, 0);
+    astack_push(0, 0, 0);
     while (data.olist.top != NULL) {
-        astack_pop_into(&data.olist, &data.parent);
+        astack_pop_into(&data.parent);
         clist[data.parent.y][data.parent.x] = true;
+
+        printf("Current node [x %2i][y %2i]\n", ADATA->parent.x,
+            ADATA->parent.y);
+
         for (direction_t dir = 0; dir < 4 && data.done == false; dir += 1)
             astar_search_neighbour(dir, clist, cell);
+        printf("\n");
         if (data.done) {
             draw_path(cell);
             break;
