@@ -13,6 +13,18 @@
 
 const adata_t *ADATA_CONTAINER = NULL;
 
+static void draw_path(cell_t cell[YMAX][XMAX])
+{
+    int row = YMAX - 1;
+    int col = XMAX - 1;
+
+    while (row || col) {
+        MTX->c[row][col] = 'o';
+        row = cell[row][col].parent.y;
+        col = cell[row][col].parent.x;
+    }
+}
+
 static void astar_init(cell_t cell[YMAX][XMAX], bool clist[YMAX][XMAX])
 {
     memset(clist, false, YMAX * XMAX * sizeof(**clist));
@@ -38,8 +50,10 @@ bool astar_search(void)
         clist[data.parent.y][data.parent.x] = true;
         for (direction_t dir = 0; dir < 4 && data.done == false; dir += 1)
             astar_search_neighbour(dir, clist, cell);
-        if (data.done)
+        if (data.done) {
+            draw_path(cell);
             break;
+        }
     }
     return data.done;
 }
