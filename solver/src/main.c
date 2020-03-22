@@ -18,7 +18,8 @@ int main(int ac, char **av)
 {
     cmtx_t cmtx = {0};
 
-    (void) ac;
+    if (ac != 2)
+        return 84 | !dprintf(2, "Wrong argument count: %d\n", ac);
     MTX = &cmtx;
     if (maze_make_charmtx(av[1], &cmtx))
         return 84;
