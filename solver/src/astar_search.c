@@ -18,11 +18,11 @@ static void draw_path(cell_t cell[YMAX][XMAX])
     int row = YMAX - 1;
     int col = XMAX - 1;
 
-    MTX->c[0][0] = 'o';
+    MTX->c[row][col] = 'o';
     while (row || col) {
-        MTX->c[row][col] = 'o';
         row = cell[row][col].parent.y;
         col = cell[row][col].parent.x;
+        MTX->c[row][col] = 'o';
     }
 }
 
@@ -55,6 +55,7 @@ bool astar_search(void)
 
         for (direction_t dir = 0; dir < 4 && data.done == false; dir += 1)
             astar_search_neighbour(dir, clist, cell);
+        maze_pretty_print();
         printf("\n");
         if (data.done) {
             draw_path(cell);
