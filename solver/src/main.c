@@ -14,6 +14,8 @@
 
 const cmtx_t *MTX = NULL;
 
+// #define astar_search() 0
+
 int main(int ac, char **av)
 {
     cmtx_t cmtx = {0};
@@ -26,10 +28,10 @@ int main(int ac, char **av)
     if (!is_path(0, 0) || !is_path(cmtx.y - 1, cmtx.x - 1))
         return 84 | !dprintf(2, "Invalid entry or exit point.\n");
     printf("Maze matrix (unaltered):\n");
-    print_matrix_withidx();
+    maze_pretty_print();
     printf("\n\n");
     if (astar_search()) {
-        print_matrix();
+        maze_pretty_print();
         return EXIT_SUCCESS;
     } else
         return 84 | !dprintf(2, "Maze is not solvable.\n");

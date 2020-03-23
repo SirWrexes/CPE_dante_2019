@@ -33,6 +33,7 @@ SRC := ./src/maze_make_charmtx.c
 SRC += ./src/astack.c
 SRC += ./src/astar_search.c
 SRC += ./src/astar_neighbours.c
+SRC += ./src/maze_pretty_print.c
 ################################################
 
 #

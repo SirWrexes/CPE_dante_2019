@@ -42,19 +42,11 @@ void astar_search_neighbour(
     int x = get_x(dir, &ADATA->parent);
     cell_t *nghbr = NULL;
 
-    printf("   Going %-5s : [x %4i][y %4i] ─  ", DIRECTION[dir], x, y);
-
-    if (!is_valid(y, x)) {
-
-        printf("Ivalid position\n");
-
+    if (!is_valid(y, x))
         return;
-    }
     nghbr = &cell[y][x];
     if (is_dest(y, x)) {
-
         printf("Exit found !\n");
-
         nghbr->parent.y = ADATA->parent.y;
         nghbr->parent.x = ADATA->parent.x;
         ADATA->done = true;
@@ -64,9 +56,6 @@ void astar_search_neighbour(
         nghbr->c = cnew;
         nghbr->parent.y = ADATA->parent.y;
         nghbr->parent.x = ADATA->parent.x;
-
-        printf("Cost = %li | Cell pushed to the opent list\n", cnew);
-    } else {
-        printf("Cost = %li | Cell skipped\n", cnew);
+        printf("   Pushin %-5s [x %4i][y %4i]\n", DIRECTION[dir], x, y);
     }
 }
