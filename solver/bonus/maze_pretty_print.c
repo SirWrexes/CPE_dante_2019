@@ -28,14 +28,14 @@ void maze_pretty_print(void)
     for (padx = 0; xmax; xmax /= 10, padx += 1) {}
     for (pady = 0; ymax; ymax /= 10, pady += 1) {}
     padx += 1;
-    for (int x = 0; x < pady + padx; x += 1)
+    for (int x = 0; x < pady + padx - 2; x += 1)
         printf(" ");
     printf("\033[4m");
     for (int x = 0; x < XMAX; x += 1)
-        printf("%*i", padx, x);
+        printf(" %-*i", padx - 1, x);
     printf("\033[0m\n");
     for (int y = 0; y < YMAX; y += 1) {
-        printf("%-*i | ", pady, y);
+        printf("%*i|", pady, y);
         for (int x = 0; x < XMAX; x += 1)
             printf("%s%*c\033[0m", get_color(y, x), padx, ' ');
         printf("\n");
