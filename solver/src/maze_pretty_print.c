@@ -16,6 +16,7 @@ static char const *get_color(int row, int col)
         case '*': return "\033[47m";
         case 'X': return "\033[41m";
         case 'o': return "\033[42m";
+        case '?': return "\033[100m";
     }
 }
 

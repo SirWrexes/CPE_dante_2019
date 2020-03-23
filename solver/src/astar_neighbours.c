@@ -56,6 +56,7 @@ void astar_search_neighbour(
         nghbr->c = cnew;
         nghbr->parent.y = ADATA->parent.y;
         nghbr->parent.x = ADATA->parent.x;
-        printf("   Pushin %-5s [x %4i][y %4i]\n", DIRECTION[dir], x, y);
+        printf("   Pushing %-5s [x %4i][y %4i]\n", DIRECTION[dir], x, y);
+        MTX->c[y][x] = '?';
     }
 }
