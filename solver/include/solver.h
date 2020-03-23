@@ -92,8 +92,25 @@ static inline void print_matrix()
 
 static inline void print_matrix_withidx()
 {
-    for (int y = 0; y < YMAX; y += 1)
-        printf("y: %-2i | %s\n", y, MTX->c[y]);
+    int padx, pady;
+    int xmax = XMAX, ymax = YMAX;
+
+    for (padx = 0; xmax; xmax /= 10, padx += 1) {}
+    for (pady = 0; ymax; ymax /= 10, pady += 1) {}
+    padx += 1;
+    for (int x = 0; x < pady + padx; x += 1)
+        printf(" ");
+    printf("\033[4m");
+    for (int x = 0; x < XMAX; x += 1)
+        printf("%*i", padx, x);
+    printf("\033[0m\n");
+    for (int y = 0; y < YMAX; y += 1) {
+        printf("%-*i | ", pady, y);
+        for (int x = 0; x < XMAX; x += 1)
+            printf("%s%*c\033[0m",
+                MTX->c[y][x] == '*' ? "\033[42m" : "\033[41m", padx, ' ');
+        printf("\n");
+    }
 }
 
 bool astar_search(void);

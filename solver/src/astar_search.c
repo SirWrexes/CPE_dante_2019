@@ -49,8 +49,8 @@ bool astar_search(void)
         astack_pop_into(&data.parent);
         clist[data.parent.y][data.parent.x] = true;
 
-        printf("Current node [x %2i][y %2i]\n", ADATA->parent.x,
-            ADATA->parent.y);
+        printf("Current node [x %2i][y %2i] = %c\n", ADATA->parent.x,
+            ADATA->parent.y, MTX->c[ADATA->parent.y][ADATA->parent.x]);
 
         for (direction_t dir = 0; dir < 4 && data.done == false; dir += 1)
             astar_search_neighbour(dir, clist, cell);

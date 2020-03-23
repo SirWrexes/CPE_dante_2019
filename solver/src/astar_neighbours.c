@@ -65,7 +65,7 @@ void astar_search_neighbour(
         nghbr->parent.y = ADATA->parent.y;
         nghbr->parent.x = ADATA->parent.x;
 
-        printf("Cost = %li | Cell pushed to the opent list", cnew);
+        printf("Cost = %li | Cell pushed to the opent list\n", cnew);
     } else {
         printf("Cost = %li | Cell skipped\n", cnew);
     }
