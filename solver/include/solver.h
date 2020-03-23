@@ -64,11 +64,6 @@ extern const cmtx_t *MTX;
 #define XMAX (MTX->x)
 #define YMAX (MTX->y)
 
-bool astack_push(cost_t c, int row, int col);
-void astack_pop_into(anode_t *container);
-
-bool maze_make_charmtx(const char *const path, cmtx_t *cmtx);
-
 static inline bool is_valid(int row, int col)
 {
     return (row >= 0 && row < MTX->y) && (col >= 0 && col < MTX->x);
@@ -81,7 +76,7 @@ static inline bool is_path(int row, int col)
 
 static inline bool is_dest(int row, int col)
 {
-    return (row == MTX->x - 1) && (col == MTX->y - 1);
+    return (row == YMAX - 1) && (col == XMAX - 1);
 }
 
 static inline void print_matrix()
@@ -90,31 +85,16 @@ static inline void print_matrix()
         printf("%s\n", MTX->c[y]);
 }
 
-static inline void print_matrix_withidx()
-{
-    int padx, pady;
-    int xmax = XMAX, ymax = YMAX;
 
-    for (padx = 0; xmax; xmax /= 10, padx += 1) {}
-    for (pady = 0; ymax; ymax /= 10, pady += 1) {}
-    padx += 1;
-    for (int x = 0; x < pady + padx; x += 1)
-        printf(" ");
-    printf("\033[4m");
-    for (int x = 0; x < XMAX; x += 1)
-        printf("%*i", padx, x);
-    printf("\033[0m\n");
-    for (int y = 0; y < YMAX; y += 1) {
-        printf("%-*i | ", pady, y);
-        for (int x = 0; x < XMAX; x += 1)
-            printf("%s%*c\033[0m",
-                MTX->c[y][x] == '*' ? "\033[42m" : "\033[41m", padx, ' ');
-        printf("\n");
-    }
-}
+bool astack_push(cost_t c, int row, int col);
+void astack_pop_into(anode_t *container);
+
+bool maze_make_charmtx(const char *const path, cmtx_t *cmtx);
 
 bool astar_search(void);
 void astar_search_neighbour(
     direction_t dir, bool clist[YMAX][XMAX], cell_t cell[YMAX][XMAX]);
+
+void maze_pretty_print(void);
 
 #endif /* !SOLVER_H */
