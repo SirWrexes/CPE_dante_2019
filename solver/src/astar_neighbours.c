@@ -32,8 +32,6 @@ static int get_x(direction_t dir, anode_t *parent)
     }
 }
 
-static const char *DIRECTION[4] = {"UP", "DOWN", "LEFT", "RIGHT"};
-
 void astar_search_neighbour(
     direction_t dir, bool clist[YMAX][XMAX], cell_t cell[YMAX][XMAX])
 {
@@ -46,7 +44,6 @@ void astar_search_neighbour(
         return;
     nghbr = &cell[y][x];
     if (is_dest(y, x)) {
-        printf("Exit found !\n");
         nghbr->parent.y = ADATA->parent.y;
         nghbr->parent.x = ADATA->parent.x;
         ADATA->done = true;
@@ -56,7 +53,6 @@ void astar_search_neighbour(
         nghbr->c = cnew;
         nghbr->parent.y = ADATA->parent.y;
         nghbr->parent.x = ADATA->parent.x;
-        printf("   Pushing %-5s [x %4i][y %4i]\n", DIRECTION[dir], x, y);
         MTX->c[y][x] = '?';
     }
 }

@@ -49,14 +49,8 @@ bool astar_search(void)
     while (data.olist.top != NULL) {
         astack_pop_into(&data.parent);
         clist[data.parent.y][data.parent.x] = true;
-
-        printf(
-            "Current node [x %2i][y %2i]\n", ADATA->parent.x, ADATA->parent.y);
-
         for (direction_t dir = 0; dir < 4 && data.done == false; dir += 1)
             astar_search_neighbour(dir, clist, cell);
-        maze_pretty_print();
-        printf("\n");
         if (data.done) {
             draw_path(cell);
             break;
