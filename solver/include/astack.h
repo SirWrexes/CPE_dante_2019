@@ -16,7 +16,7 @@ typedef struct astar_node_s {
     int x;
     int y;
     cost_t c;
-    struct anode_s *next;
+    struct astar_node_s *next;
 } anode_t;
 
 typedef struct astar_stack_s {
