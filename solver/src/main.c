@@ -12,26 +12,22 @@
 #include "smart.h"
 #include "solver.h"
 
-const cmtx_t *MTX = NULL;
-
-// #define astar_search() 0
+const mtx_t *MTX = NULL;
 
 int main(int ac, char **av)
 {
-    cmtx_t cmtx = {0};
+    mtx_t cmtx = {0};
 
     if (ac != 2)
         return 84 | !dprintf(2, "Wrong argument count: %d\n", ac);
     MTX = &cmtx;
-    if (maze_make_charmtx(av[1], &cmtx))
+    if (maze_make_matrix(av[1]))
         return 84;
-    if (!is_path(0, 0) || !is_path(cmtx.y - 1, cmtx.x - 1))
-        return 84 | !dprintf(2, "Invalid entry or exit point.\n");
     printf("Maze matrix (unaltered):\n");
-    maze_pretty_print();
+    print_matrix();
     printf("\n\n");
     if (astar_search()) {
-        maze_pretty_print();
+        print_matrix();
         return EXIT_SUCCESS;
     } else
         return 84 | !dprintf(2, "Maze is not solvable.\n");
