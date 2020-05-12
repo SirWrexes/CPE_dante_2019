@@ -29,11 +29,11 @@ CUSTOM_CFLAGS := -D__USE_GNU
 ################################################
 MAIN := ./src/main.c
 # -------------------------------------------- #
-SRC := ./src/maze_make_charmtx.c
+SRC := ./bonus/maze_pretty_print.c
 SRC += ./src/astack.c
-SRC += ./src/astar_search.c
 SRC += ./src/astar_neighbours.c
-SRC += ./bonus/maze_pretty_print.c
+SRC += ./src/astar_search.c
+SRC += ./src/maze_make_matrix.c
 ################################################
 
 #
