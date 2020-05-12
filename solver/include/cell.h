@@ -21,4 +21,6 @@ typedef struct {
     cost_t c;
 } cell_t;
 
+typedef enum { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 } direction_t;
+
 #endif /* !CELL_H */
