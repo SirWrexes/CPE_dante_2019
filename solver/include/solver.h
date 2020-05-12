@@ -13,9 +13,12 @@
 #include <sys/cdefs.h>
 #include <sys/types.h>
 
-#include "astar.h"
+#include "adata.h"
+#include "astack.h"
 #include "cell.h"
 #include "matrix.h"
+
+#define print_matrix(x) maze_pretty_print()
 
 void maze_pretty_print(void);
 
