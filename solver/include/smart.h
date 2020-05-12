@@ -8,11 +8,10 @@
 #ifndef SMART_H
 #define SMART_H
 
-
 // Smart pointers
 #include <malloc.h>
 
-#define __getp(p) (* (void **) (p))
+#define __getp(p) (*(void **) (p))
 
 __nonnull() static inline void free_ptr(void *p)
 {
