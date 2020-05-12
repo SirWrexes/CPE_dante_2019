@@ -23,8 +23,10 @@ CFLAGS  += -fdiagnostics-color=auto
 CFLAGS  += $(foreach dir, $(INCDIRS), -iquote $(dir))
 CFLAGS  += $(CUSTOM_CFLAGS)
 # ---------------------------------------------------------------------------------------- #
+ifndef NOLIBFOX
 LDFLAGS += $(foreach mod, $(FOXMODULES), -L./lib/libfox/$(strip $(mod)))
 LDLIBS  += $(foreach mod, $(FOXMODULES), -lfox_$(strip $(mod)))
+endif
 LDLIBS  += $(foreach lib, $(LIBS), -l$(strip $(lib)))
 # ---------------------------------------------------------------------------------------- #
 OBJ     := $(SRC:.c=.o) $(DEPSRC:.c=.o)
