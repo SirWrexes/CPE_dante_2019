@@ -53,6 +53,6 @@ void astar_search_neighbour(
         nghbr->c = cnew;
         nghbr->parent.y = ADATA->parent.y;
         nghbr->parent.x = ADATA->parent.x;
-        MTX->c[y][x] = '?';
+        MTX->m[y][x] = '?';
     }
 }

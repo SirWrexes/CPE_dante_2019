@@ -18,11 +18,11 @@ static void draw_path(cell_t cell[YMAX][XMAX])
     int row = YMAX - 1;
     int col = XMAX - 1;
 
-    MTX->c[row][col] = 'o';
+    MTX->m[row][col] = 'o';
     while (row || col) {
         row = cell[row][col].parent.y;
         col = cell[row][col].parent.x;
-        MTX->c[row][col] = 'o';
+        MTX->m[row][col] = 'o';
     }
 }
 

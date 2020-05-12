@@ -11,7 +11,7 @@
 
 static char const *get_color(int row, int col)
 {
-    switch (MTX->c[row][col]) {
+    switch (MTX->m[row][col]) {
         default: return NULL;
         case '*': return "\033[47m";
         case 'X': return "\033[41m";

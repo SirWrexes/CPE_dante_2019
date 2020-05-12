@@ -17,7 +17,7 @@ typedef struct {
     int y;
 
     // 2D matrix
-    char **c;
+    char **m;
 
     // Origin buffer pointer (to free at the end)
     char *buff;
@@ -34,7 +34,7 @@ static inline bool is_valid(int row, int col)
 
 static inline bool is_path(int row, int col)
 {
-    return MTX->c[row][col] == '*';
+    return MTX->m[row][col] == '*';
 }
 
 static inline bool is_dest(int row, int col)
@@ -45,7 +45,7 @@ static inline bool is_dest(int row, int col)
 static inline void print_matrix()
 {
     for (int y = 0; y < YMAX; y += 1)
-        printf("%s\n", MTX->c[y]);
+        printf("%s\n", MTX->m[y]);
 }
 
 bool maze_make_matrix(const char *const path);
