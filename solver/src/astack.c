@@ -9,30 +9,41 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include "solver.h"
+#include "astack.h"
+#include "adata.h"
 
 void astack_pop_into(anode_t *container)
 {
-    anode_t *top = ADATA->olist.top;
+    anode_t *pop = astack_pop();
 
-    if (top != NULL)  {
-        memcpy(container, ADATA->olist.top, sizeof(*container));
-        container->next = NULL;
-        ADATA->olist.top = top->next;
-        free(top);
+    if (pop != NULL) {
+        memcpy(container, pop, sizeof(*pop));
+        free(pop);
     }
 }
 
-bool astack_push(cost_t c, int row, int col)
+anode_t *astack_pop(void)
+{
+    anode_t *pop = NULL;
+
+    if (ADATA->stack.top != NULL)  {
+        pop = ADATA->stack.top;
+        ADATA->stack.top = ADATA->stack.top->next;
+        pop->next = NULL;
+    }
+    return pop;
+}
+
+bool astack_push(cost_t cost, int row, int col)
 {
     anode_t *node = malloc(sizeof(*node));
 
     if (node != NULL) {
-        node->c = c;
+        node->cost = cost;
         node->y = row;
         node->x = col;
-        node->next = ADATA->olist.top;
-        ADATA->olist.top = node;
+        node->next = ADATA->stack.top;
+        ADATA->stack.top = node;
     }
     return !(node != NULL);
 }

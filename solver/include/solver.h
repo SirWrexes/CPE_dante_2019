@@ -20,6 +20,10 @@
 
 #define print_matrix(x) maze_pretty_print()
 
+bool astar_search(void);
+void astar_search_neighbour(
+    direction_t dir, bool clist[YMAX][XMAX], cell_t cell[YMAX][XMAX]);
+
 void maze_pretty_print(void);
 
 #endif /* !SOLVER_H */

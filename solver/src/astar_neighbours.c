@@ -33,9 +33,9 @@ static int get_x(direction_t dir, anode_t *parent)
 }
 
 void astar_search_neighbour(
-    direction_t dir, bool clist[YMAX][XMAX], cell_t cell[YMAX][XMAX])
+    direction_t dir, bool visited[YMAX][XMAX], cell_t cell[YMAX][XMAX])
 {
-    cost_t cnew = ADATA->parent.c + 1;
+    cost_t cnew = ADATA->parent.cost + 1;
     int y = get_y(dir, &ADATA->parent);
     int x = get_x(dir, &ADATA->parent);
     cell_t *nghbr = NULL;
@@ -47,10 +47,10 @@ void astar_search_neighbour(
         nghbr->parent.y = ADATA->parent.y;
         nghbr->parent.x = ADATA->parent.x;
         ADATA->done = true;
-    } else if (!clist[y][x] && is_path(y, x)
-        && (nghbr->c == -1 || nghbr->c > cnew)) {
+    } else if (!visited[y][x] && is_path(y, x)
+        && (nghbr->cost == -1 || nghbr->cost > cnew)) {
         astack_push(cnew, y, x);
-        nghbr->c = cnew;
+        nghbr->cost = cnew;
         nghbr->parent.y = ADATA->parent.y;
         nghbr->parent.x = ADATA->parent.x;
         MTX->m[y][x] = '?';

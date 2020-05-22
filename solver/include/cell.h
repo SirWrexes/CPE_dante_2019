@@ -18,7 +18,7 @@ typedef struct {
         int x;
         int y;
     } parent;
-    cost_t c;
+    cost_t cost;
 } cell_t;
 
 typedef enum { UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3 } direction_t;

@@ -13,7 +13,7 @@
 #include "astack.h"
 
 typedef struct astar_data_s {
-    astack_t olist;
+    astack_t stack;
     anode_t parent;
     bool done;
 } adata_t;

@@ -15,7 +15,7 @@
 typedef struct astar_node_s {
     int x;
     int y;
-    cost_t c;
+    cost_t cost;
     struct astar_node_s *next;
 } anode_t;
 
@@ -25,5 +25,6 @@ typedef struct astar_stack_s {
 
 bool astack_push(cost_t c, int row, int col);
 void astack_pop_into(anode_t *container);
+anode_t *astack_pop();
 
 #endif /* !ASTACK_H */
